@@ -4,7 +4,7 @@ import { FiFolder } from 'react-icons/fi';
 import { FaEthereum } from 'react-icons/fa';
 import { IoQrCode } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-import NFTInfo from '../pages/NftInfo';
+import NFTInfo from './NftInfo';
 import { NFTData as initialNFTData } from '../components/nftData';
 
 interface NFT {

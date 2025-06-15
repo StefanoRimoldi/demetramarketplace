@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { FaEthereum } from 'react-icons/fa';
 import { MdVerified, MdContentCopy } from 'react-icons/md';
 import { GiMapleLeaf } from "react-icons/gi";
-import NFTInfo from '../pages/NftInfo';
+import NFTInfo from './NftInfo';
 import { RiAuctionLine } from "react-icons/ri";
 
 // ★ Rating a foglie

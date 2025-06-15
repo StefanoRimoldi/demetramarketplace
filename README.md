@@ -15,7 +15,7 @@
   - [Accedi all'applicazione](#accedi-allapplicazione)
 - [Tecnologie Utilizzate](#tecnologie-utilizzate)
 - [Funzionalità](#funzionalità)
-- [SmartContracts] (#smart-contracts)
+- [Smart Contracts](#smart-contracts)
 - [Link Progetto](#link-progetto)
 - [Contatti](#contatti)
 
@@ -97,21 +97,21 @@ http://localhost:3000
 
 Password di accesso alla pagina Mint: nft123
 
-## Smart Contracts
+## SmartContracts
 
 L’applicazione interagisce con diversi smart contract deployati sulla rete Ethereum (testnet Sepolia), ciascuno responsabile di una funzionalità specifica del marketplace:
 
 - **BuyNow Contract**:
 Gestisce l’acquisto diretto degli NFT.
-Indirizzo: 0xe6a42b05d74E9Cb7A9E3f54EC94C8FE09d0C0034
+Indirizzo: 
 - **Auction Contract**:
 Consente agli utenti di partecipare o avviare aste per gli NFT.
 Indirizzo: 0x321997fF247410A2053F386FCc49207B8343c7d3
 - **TransferNFT Contract**:
-Permette il trasferimento di NFT da un utente a un altro in modalità peer-to-peer.
+Permette il trasferimento di NFT da un utente a un altro.
 Indirizzo: 0xb27A31f1b0AF2946B7F582768f03239b1eC07c2c
 - **MintNFT Contract**
-Responsabile della creazione (minting) degli NFT all’interno della piattaforma.
+Responsabile del minting degli NFT all’interno della piattaforma.
 Indirizzo: 0x0fC5025C764cE34df352757e82f7B5c4Df39A836
 
 
@@ -120,9 +120,9 @@ Indirizzo: 0x0fC5025C764cE34df352757e82f7B5c4Df39A836
 - Remix Ethereum IDE
 
 ## Link progetto:
-- Repo GitHub: https://github.com/StefanoRimoldi/
-- Netlify: https://
-- Vercel: https://
+- Repo GitHub: https://github.com/StefanoRimoldi/demetramarketplace.git
+- Netlify: https://demetramarketplace.netlify.app/
+- Vercel: https://demetramarketplace.vercel.app/
 
 
 ## Contatti
