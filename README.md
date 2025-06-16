@@ -102,17 +102,17 @@ Password di accesso alla pagina Mint: nft123
 L’applicazione interagisce con diversi smart contract deployati sulla rete Ethereum (testnet Sepolia), ciascuno responsabile di una funzionalità specifica del marketplace:
 
 - **BuyNow Contract**:
-Gestisce l’acquisto diretto degli NFT.
-Indirizzo: 
+Gestisce l’acquisto diretto degli NFT.<br>
+Indirizzo: 0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B
 - **Auction Contract**:
-Consente agli utenti di partecipare o avviare aste per gli NFT.
-Indirizzo: 0x321997fF247410A2053F386FCc49207B8343c7d3
+Consente agli utenti di partecipare o avviare aste per gli NFT.<br>
+Indirizzo: 0xf8e81D47203A594245E36C48e151709F0C19fBe8
 - **TransferNFT Contract**:
-Permette il trasferimento di NFT da un utente a un altro.
-Indirizzo: 0xb27A31f1b0AF2946B7F582768f03239b1eC07c2c
+Permette il trasferimento di NFT da un utente a un altro.<br>
+Indirizzo: 0xDA0bab807633f07f013f94DD0E6A4F96F8742B53
 - **MintNFT Contract**
-Responsabile del minting degli NFT all’interno della piattaforma.
-Indirizzo: 0x0fC5025C764cE34df352757e82f7B5c4Df39A836
+Responsabile del minting degli NFT all’interno della piattaforma.<br>
+Indirizzo: 0x7EF2e0048f5bAeDe046f6BF797943daF4ED8CB47
 
 
 ## Realizzato con:
