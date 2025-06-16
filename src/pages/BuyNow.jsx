@@ -22,8 +22,8 @@ const NFTInfo = () => {
   const [balance, setBalance] = useState(0);
   const [isSoldOut, setIsSoldOut] = useState(false);
 
-  const contractAddress = "0xe6a42b05d74E9Cb7A9E3f54EC94C8FE09d0C0034";
-  const auctionContractAddress = "0x59580eC84Dc02053A26c987d4c9D20cd937CC5bA";
+  const contractAddress = "0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B";
+  const auctionContractAddress = "0xf8e81D47203A594245E36C48e151709F0C19fBe8";
   const [bids, setBids] = useState([]);
   const [timer, setTimer] = useState(null);
   const [auctionActive, setAuctionActive] = useState(false);

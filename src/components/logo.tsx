@@ -1,4 +1,4 @@
-// Logo.tsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../components/img/logo-black.png';

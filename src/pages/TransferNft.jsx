@@ -8,7 +8,7 @@ import { FaWallet } from 'react-icons/fa';
 import { FaTimes } from 'react-icons/fa';
 
 const abi = TransferNftArtifact.abi;
-const contractAddress = "0x5f0163d0888aed91d9D1Bee969D2948893a010A5";
+const contractAddress = "0xDA0bab807633f07f013f94DD0E6A4F96F8742B53";
 
 const TransferNFT = () => {
     const { isWalletConnected, account, connectWallet } = useWallet();

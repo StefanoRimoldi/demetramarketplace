@@ -12,7 +12,7 @@ contract MintNFT is ERC721 {
     mapping(uint256 => string) public tokenRarity;
     mapping(uint256 => uint256) public tokenPrices;
     mapping(uint256 => string) public tokenImageURLs;
-    mapping(uint256 => uint256) public tokenDiscounts; // Solo informativo
+    mapping(uint256 => uint256) public tokenDiscounts;
 
     event Minted(uint256 tokenId, string title, string description, string rarity, uint256 price, string imageURL, uint256 discount);
 
@@ -50,7 +50,7 @@ contract MintNFT is ERC721 {
         tokenPrices[tokenId] = price;
     }
 
-    // Acquista NFT al prezzo intero (senza applicare sconto)
+    // Acquista NFT al prezzo intero
     function buyNFT(uint256 tokenId) public payable {
         uint256 price = tokenPrices[tokenId];
         require(msg.value >= price, "Insufficient funds");
@@ -62,13 +62,13 @@ contract MintNFT is ERC721 {
         tokenPrices[tokenId] = 0;
     }
 
-    // Trasferisci NFT
+
     function transferNFT(address from, address to, uint256 tokenId) public {
         require(ownerOf(tokenId) == from, "You are not the owner");
         _transfer(from, to, tokenId);
     }
 
-    // Leggi tutti i dettagli di un NFT
+
     function getNFTDetails(uint256 tokenId) public view returns (
         string memory title,
         string memory description,
