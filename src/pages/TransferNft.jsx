@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { useWallet } from '../components/context/WalletContext';
-import { NFTData as initialNFTData } from '../components/nftData';
+import { useWallet } from '../context/WalletContext';
+import { NFTData as initialNFTData } from '../data/nftData';
 import { ethers } from 'ethers';
 import TransferNftArtifact from '../contracts-abi/TransferNft.json';
 import { Link } from 'react-router-dom';

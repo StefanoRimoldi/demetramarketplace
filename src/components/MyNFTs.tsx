@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useWallet } from '../components/context/WalletContext';
+import { useWallet } from '../context/WalletContext';
 import { FiFolder } from 'react-icons/fi';
 import { FaEthereum } from 'react-icons/fa';
 import { IoQrCode } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-import NFTInfo from './NftInfo';
-import { NFTData as initialNFTData } from '../components/nftData';
+import NFTInfo from '../components/NftInfo';
+import { NFTData as initialNFTData } from '../data/nftData';
 
 interface NFT {
     nftId: string;

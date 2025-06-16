@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import { useWallet } from '../components/context/WalletContext';
+import { useWallet } from '../context/WalletContext';
 import { useLocation } from 'react-router-dom';
-import { NFTData } from '../components/nftData';
+import { NFTData } from '../data/nftData';
 import contractABI from '../contracts-abi/NFTMarketplace.json';
 import auctionContractABI from '../contracts-abi/NFTAuction.json';
 import { FaTimes, FaUser } from "react-icons/fa";
@@ -23,7 +23,7 @@ const NFTInfo = () => {
     const [isSoldOut, setIsSoldOut] = useState(false); // Nuovo stato per "Sold Out"
 
     const contractAddress = "0xE63b7e012ed67e6C339aEfE33850353397b8c88D";
-    const auctionContractAddress = "0x59580eC84Dc02053A26c987d4c9D20cd937CC5bA";
+    const auctionContractAddress = "0xf8e81D47203A594245E36C48e151709F0C19fBe8";
     const [bidAmount, setBidAmount] = useState("");
     const [bids, setBids] = useState([]);
     const [isBidLoading, setIsBidLoading] = useState(false);

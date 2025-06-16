@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useWallet } from '../components/context/WalletContext';
-import { NFTData as initialNFTData } from '../components/nftData';
+import { useWallet } from '../context/WalletContext';
+import { NFTData as initialNFTData } from '../data/nftData';
 import { Trash2 } from 'lucide-react';
 import { FaWallet } from 'react-icons/fa';
 

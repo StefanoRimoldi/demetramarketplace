@@ -1,19 +1,19 @@
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './pages/Header.tsx';
-import LandingPage from './pages/LandingPage.tsx'
-import NFTInfo from './pages/NftInfo.jsx';
+import Header from './components/Header.tsx';
+import LandingPage from './components/LandingPage.tsx'
+import NFTInfo from './components/NftInfo.jsx';
 import TransferNft from './pages/TransferNft.jsx';
-import Footer from './pages/Footer.tsx';
+import Footer from './components/Footer.tsx';
 import Auction from './pages/Auction.tsx';
 import PurchaseHistory from './pages/PurchaseHistory.jsx';
-import NftGallery from './pages/NftGallery.tsx';
-import MyNFTs from './pages/MyNFTs.tsx';
+import NftGallery from './components/NftGallery.tsx';
+import MyNFTs from './components/MyNFTs.tsx';
 import AboutUs from './pages/AboutUs.tsx';
 import BuyNow from './pages/BuyNow.jsx';
 import MintNFT from './pages/MintNFT.tsx';
-import { WalletProvider } from './components/context/WalletContext';
-import { PurchaseProvider  } from './components/context/PurchaseContext';
+import { WalletProvider } from './context/WalletContext.jsx';
+import { PurchaseProvider  } from './context/PurchaseContext.jsx';
 
 function App() {
   return (

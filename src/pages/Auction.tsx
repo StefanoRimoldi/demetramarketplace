@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NFTData } from '../components/nftData';
+import { NFTData } from '../data/nftData';
 import { Link } from 'react-router-dom';
 import { FaEthereum } from 'react-icons/fa';
 import { MdVerified, MdContentCopy } from 'react-icons/md';

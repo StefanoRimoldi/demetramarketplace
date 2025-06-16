@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
 import { FaTimes, FaCopy, FaExchangeAlt } from "react-icons/fa";
 import { BiNetworkChart } from "react-icons/bi";
-import { useWallet } from '../components/context/WalletContext';
+import { useWallet } from '../context/WalletContext';
 import { Link } from 'react-router-dom';
 
 const Header = () => {

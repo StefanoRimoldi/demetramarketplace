@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import { useWallet } from '../components/context/WalletContext';
+import { useWallet } from '../context/WalletContext';
 import { useLocation } from 'react-router-dom';
-import { NFTData } from '../components/nftData';
+import { NFTData } from '../data/nftData';
 import contractABI from '../contracts-abi/NFTMarketplace.json';
 import auctionContractABI from '../contracts-abi/NFTAuction.json';
 import { FaShoppingCart, FaTimes } from "react-icons/fa";
