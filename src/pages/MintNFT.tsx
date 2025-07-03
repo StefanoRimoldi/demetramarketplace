@@ -16,18 +16,18 @@ const MintNFTForm = () => {
     imageURL: "",
     discount: "",
   });
-  const [status, setStatus] = useState(""); // Stato del messaggio di stato
+  const [status, setStatus] = useState("");
   const [mintedTokenId, setMintedTokenId] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState(""); // Successo o errore
+  const [modalType, setModalType] = useState("");
 
-  const [passwordModalVisible, setPasswordModalVisible] = useState(true); // Stato per mostrare la finestra di inserimento password
-  const [password, setPassword] = useState(""); // Stato per memorizzare la password
+  const [passwordModalVisible, setPasswordModalVisible] = useState(true);
+  const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
   const handlePasswordSubmit = () => {
     if (password === "nft123") { // Cambia qui la password
-      setPasswordModalVisible(false); // Se la password è corretta, nascondi la finestra di password
+      setPasswordModalVisible(false);
     } else {
       alert("Invalid password");
     }
@@ -39,18 +39,18 @@ const MintNFTForm = () => {
 
   const mintNFT = async () => {
     try {
-      // Controlla se l'utente ha MetaMask installato e connesso
+      
       if (!window.ethereum) {
         return alert("Please install MetaMask!");
       }
 
-      // Verifica se c'è una connessione attiva a MetaMask
+      
       const accounts = await window.ethereum.request({ method: "eth_accounts" });
       if (accounts.length === 0) {
         return alert("Connect your MetaMask wallet to continue.");
       }
 
-      // Se MetaMask è connesso, procedi con il minting
+      
       await window.ethereum.request({ method: "eth_requestAccounts" });
 
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -60,7 +60,7 @@ const MintNFTForm = () => {
       const priceInWei = ethers.utils.parseEther(form.price);
 
       setStatus("Minting ongoing");
-      setModalType("loading"); // Mostra lo stato di "loading"
+      setModalType("loading");
       setShowModal(true);
 
       const tx = await contract.mintNFT(
@@ -75,7 +75,7 @@ const MintNFTForm = () => {
 
       const receipt = await tx.wait();
 
-      // Verifica gli eventi nella transazione
+      
       console.log("Events received", receipt.events);
 
       const mintedEvent = receipt.events?.find((e) => e.event === "Minted");
@@ -85,15 +85,15 @@ const MintNFTForm = () => {
         const tokenId = mintedEvent.args.tokenId.toString();
         setMintedTokenId(tokenId);
         setStatus(`✅ NFT created with Token ID: ${tokenId}`);
-        setModalType("success"); // Mostra la finestra di successo
+        setModalType("success");
       } else {
         setStatus("✅ NFT minted, but unable to retrieve Token ID");
-        setModalType("error"); // Mostra la finestra di errore
+        setModalType("error");
       }
     } catch (error) {
       console.error(error);
       setStatus("❌ Failed to mint NFT");
-      setModalType("error"); // Mostra la finestra di errore
+      setModalType("error");
     }
   };
 
@@ -156,7 +156,7 @@ const MintNFTForm = () => {
 
           {form.imageURL && (
             <div className="mb-4">
-              <p className="text-sm text-gray-300 mb-2">Anteprima immagine:</p>
+              <p className="text-sm text-gray-300 mb-2">Image Preview:</p>
               <img
                 src={form.imageURL}
                 alt="Preview"
@@ -174,7 +174,7 @@ const MintNFTForm = () => {
             {status === "Minting in corso..." ? "Minting in corso..." : "Mint NFT"}
           </button>
 
-          {/* Mostra il messaggio di status solo se non è "Minting in corso..." */}
+          
           {status && status !== "Minting in corso..." && <p className="mt-3 text-white">{status}</p>}
 
           {mintedTokenId && (
@@ -191,14 +191,14 @@ const MintNFTForm = () => {
             </p>
           )}
 
-          {/* Modal: Successo, Errore o Loading */}
+         
           {showModal && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
               <div className="bg-gray-800 rounded-xl p-6 max-w-md w-full">
                 {modalType === "loading" && (
                   <>
-                    <h3 className="text-lg font-bold text-gray-300 mb-4">Minting in corso...</h3>
-                    <p className="text-gray-400">Attendi mentre stiamo creando il tuo NFT.</p>
+                    <h3 className="text-lg font-bold text-gray-300 mb-4">Minting in progress...</h3>
+                    <p className="text-gray-400">Please wait while your NFT is being created.</p>
                   </>
                 )}
 
@@ -209,7 +209,7 @@ const MintNFTForm = () => {
                         <FaCheck className="text-white text-3xl" />
                       </div>
                     </div>
-                    <h3 className="text-lg font-bold text-green-400 mb-4">Successo!</h3>
+                    <h3 className="text-lg font-bold text-green-400 mb-4">Success!</h3>
                     <p className="text-gray-300">{status}</p>
                   </>
                 )}
@@ -221,13 +221,13 @@ const MintNFTForm = () => {
                         <FaTimes className="text-white text-3xl" />
                       </div>
                     </div>
-                    <h3 className="text-lg font-bold text-red-400 mb-4">Errore!</h3>
+                    <h3 className="text-lg font-bold text-red-400 mb-4">Error!</h3>
                     <p className="text-gray-300">{status}</p>
                   </>
                 )}
 
                 <button onClick={closeModal} className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200">
-                  Chiudi
+                  Close
                 </button>
 
                 <Link to="/" className="mt-4 block text-center">
