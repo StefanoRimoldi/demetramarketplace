@@ -293,7 +293,7 @@ return (
 
 
 
-          {/* Bottone Acquisto (spostato qui sotto) */}
+          {/* Bottone Acquisto*/}
           <div className="space-y-2">
             <button
               className={`w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-green-600 to-orange-600 hover:from-green-700 hover:to-orange-700 rounded-md text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
@@ -320,7 +320,7 @@ return (
             </button>
 
             <Link
-              to="/" // Sostituisci con il percorso corretto della tua dashboard
+              to="/"
               className="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 rounded-md text-white font-medium transition-colors"
             >
               <FaTimes className="mr-2" />
