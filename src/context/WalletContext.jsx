@@ -14,21 +14,27 @@ export const WalletProvider = ({ children }) => {
 
  
   const connectWallet = async () => {
-    if (window.ethereum) {
-      try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const currentTime = new Date().getTime();
-        await accountChangeHandler(accounts[0]);
-        setIsWalletConnected(true);
-        localStorage.setItem('connectedWallet', accounts[0]);
-        localStorage.setItem('walletSessionTimestamp', currentTime);
-      } catch (error) {
-        console.error('Errore durante la connessione al wallet:', error);
+  if (window.ethereum) {
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const networkId = await window.ethereum.request({ method: 'net_version' });
+      if (networkId !== '11155111') {
+        alert('Please connect to the Sepolia network');
+        return;
       }
-    } else {
-      alert('Devi installare un wallet Ethereum');
+      const currentTime = new Date().getTime();
+      await accountChangeHandler(accounts[0]);
+      setIsWalletConnected(true);
+      localStorage.setItem('connectedWallet', accounts[0]);
+      localStorage.setItem('walletSessionTimestamp', currentTime);
+    } catch (error) {
+      console.error('Wallet connection failed:', error);
     }
-  };
+  } else {
+    alert('You need to install an Ethereum wallet.');
+  }
+};
+
 
   const disconnectWallet = () => {
     setIsWalletConnected(false);
@@ -136,7 +142,7 @@ export const WalletProvider = ({ children }) => {
 export const useWallet = () => {
   const context = useContext(WalletContext);
   if (context === undefined) {
-    throw new Error("useWallet deve essere usato all'interno di un WalletProvider");
+    throw new Error("useWallet must be used within a WalletProvider");
   }
   return context;
 };

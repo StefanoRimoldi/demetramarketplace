@@ -15,10 +15,12 @@ import MintNFT from './pages/MintNFT.tsx';
 import { WalletProvider } from './context/WalletContext.jsx';
 import { PurchaseProvider  } from './context/PurchaseContext.jsx';
 
+
 function App() {
   return (
     <Router>
       <WalletProvider>
+        
         <PurchaseProvider >
         <Header />
 
@@ -34,9 +36,9 @@ function App() {
           <Route path="/buynow" element={<BuyNow />} />
           <Route path="/mintnft" element={<MintNFT />} />
         </Routes>
-         
         <Footer />
       </PurchaseProvider >
+     
       </WalletProvider>
     </Router>
   );

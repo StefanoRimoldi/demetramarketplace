@@ -1,118 +1,8 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\contracts\\HandlePayment.sol": {
-      "lastModificationDate": 1744589712479,
-      "contentHash": "8edd5ca5f555f6aa7c44066dc47205c2",
-      "sourceName": "contracts/HandlePayment.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.27"
-      ],
-      "artifacts": [
-        "HandlePayment"
-      ]
-    },
-    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\contracts\\NFTAuction.sol": {
-      "lastModificationDate": 1744589712492,
-      "contentHash": "a171667176daa41ae361fdf86250aec2",
-      "sourceName": "contracts/NFTAuction.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "NFTAuction"
-      ]
-    },
-    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\contracts\\NftContract.sol": {
-      "lastModificationDate": 1745450241928,
-      "contentHash": "4da275985266b0006f0fa796a82a75ca",
-      "sourceName": "contracts/NftContract.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC721/ERC721.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "NftContract"
-      ]
-    },
     "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol": {
-      "lastModificationDate": 1743979595682,
+      "lastModificationDate": 1751411302205,
       "contentHash": "a7951c81f7037d558c6d2f220b0cb38e",
       "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
@@ -230,8 +120,8 @@
       ]
     },
     "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\utils\\ERC721Utils.sol": {
-      "lastModificationDate": 1743979597227,
-      "contentHash": "f4b67273e290784d0e155f004ae52f0b",
+      "lastModificationDate": 1751411302632,
+      "contentHash": "e12814872b31b0af06106796a6621b04",
       "sourceName": "@openzeppelin/contracts/token/ERC721/utils/ERC721Utils.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -269,8 +159,8 @@
       ]
     },
     "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\node_modules\\@openzeppelin\\contracts\\utils\\Strings.sol": {
-      "lastModificationDate": 1743979612755,
-      "contentHash": "f4cc092958a3ddec1f4ed4103bfc54dd",
+      "lastModificationDate": 1751411308342,
+      "contentHash": "13dbc135f563c72a11b1cf4fbb5fb284",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -298,6 +188,7 @@
       },
       "imports": [
         "./math/Math.sol",
+        "./math/SafeCast.sol",
         "./math/SignedMath.sol"
       ],
       "versionPragmas": [
@@ -494,8 +385,8 @@
       ]
     },
     "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\node_modules\\@openzeppelin\\contracts\\utils\\math\\Math.sol": {
-      "lastModificationDate": 1743979608624,
-      "contentHash": "2b2665ae9bdb1af440658741a77fe213",
+      "lastModificationDate": 1751411306853,
+      "contentHash": "5ec781e33d3a9ac91ffdc83d94420412",
       "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -642,9 +533,273 @@
         "SafeCast"
       ]
     },
+    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\node_modules\\@openzeppelin\\contracts\\access\\Ownable.sol": {
+      "lastModificationDate": 1743979609652,
+      "contentHash": "d3c790edc9ccf808a17c5a6cd13614fd",
+      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../utils/Context.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Ownable"
+      ]
+    },
+    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\ERC721URIStorage.sol": {
+      "lastModificationDate": 1751411302590,
+      "contentHash": "9aefce4573c7ae661acf9d5d78d5450b",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../ERC721.sol",
+        "../../../utils/Strings.sol",
+        "../../../interfaces/IERC4906.sol",
+        "../../../interfaces/IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ERC721URIStorage"
+      ]
+    },
+    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\node_modules\\@openzeppelin\\contracts\\interfaces\\IERC4906.sol": {
+      "lastModificationDate": 1743979605569,
+      "contentHash": "273c26c9c728a6052d1175ace81d10b4",
+      "sourceName": "@openzeppelin/contracts/interfaces/IERC4906.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC165.sol",
+        "./IERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IERC4906"
+      ]
+    },
+    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\node_modules\\@openzeppelin\\contracts\\interfaces\\IERC165.sol": {
+      "lastModificationDate": 1743979602875,
+      "contentHash": "f808b485ee0cdc6768ee8385ae5f9a2a",
+      "sourceName": "@openzeppelin/contracts/interfaces/IERC165.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../utils/introspection/IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": []
+    },
+    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\node_modules\\@openzeppelin\\contracts\\interfaces\\IERC721.sol": {
+      "lastModificationDate": 1743979606416,
+      "contentHash": "d8d23fc2f55ed934d1a1b91c9afd8526",
+      "sourceName": "@openzeppelin/contracts/interfaces/IERC721.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../token/ERC721/IERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": []
+    },
+    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\contracts\\HandlePayment.sol": {
+      "lastModificationDate": 1751499220578,
+      "contentHash": "ac276c0bd719ac359af9a8ba2d849b24",
+      "sourceName": "contracts/HandlePayment.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.27"
+      ],
+      "artifacts": [
+        "HandlePayment"
+      ]
+    },
+    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\contracts\\MintNFT.sol": {
+      "lastModificationDate": 1751499219724,
+      "contentHash": "008bd4c639412d9c45e876abcb131b68",
+      "sourceName": "contracts/MintNFT.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "MintNFT"
+      ]
+    },
     "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\contracts\\TransferNft.sol": {
-      "lastModificationDate": 1746142508004,
-      "contentHash": "05a893850788aeb14b22d062e5956af5",
+      "lastModificationDate": 1751499274621,
+      "contentHash": "34b6dd2ff1bd854dd0edcc02043a3f93",
       "sourceName": "contracts/TransferNft.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -680,10 +835,87 @@
         "TransferNft"
       ]
     },
-    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\contracts\\MintNFT.sol": {
-      "lastModificationDate": 1746987549895,
-      "contentHash": "1af143c8c8d83353aaceeed147738c0e",
-      "sourceName": "contracts/MintNFT.sol",
+    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\contracts\\WinnerNFT.sol": {
+      "lastModificationDate": 1751412490014,
+      "contentHash": "4a01fbcb183b2d3395984f16b1f62fbe",
+      "sourceName": "contracts/WinnerNFT.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "WinnerNFT"
+      ]
+    },
+    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\contracts\\NFTMinted.sol": {
+      "lastModificationDate": 1751499219944,
+      "contentHash": "1350d398a2066fec6690cbd5e40aee49",
+      "sourceName": "contracts/NFTMinted.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "NFTMinted"
+      ]
+    },
+    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\contracts\\NftContract.sol": {
+      "lastModificationDate": 1751499220393,
+      "contentHash": "1fb60d20d1a57050410365af6d311be5",
+      "sourceName": "contracts/NftContract.sol",
       "solcConfig": {
         "version": "0.8.27",
         "settings": {
@@ -715,7 +947,44 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "MintNFT"
+        "NftContract"
+      ]
+    },
+    "C:\\Users\\Stefano Rimoldi\\Desktop\\nft-marketplace-main\\contracts\\NFTAuction.sol": {
+      "lastModificationDate": 1751499220492,
+      "contentHash": "dbc1af4a31540f695ebc7dcc912d495d",
+      "sourceName": "contracts/NFTAuction.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "INFTMinted",
+        "NFTAuction"
       ]
     }
   }

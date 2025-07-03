@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { useWallet } from '../context/WalletContext';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { NFTData } from '../data/nftData';
-import contractABI from '../contracts-abi/NFTMarketplace.json';
 import auctionContractABI from '../contracts-abi/NFTAuction.json';
 import { FaTimes, FaUser } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { FiClock } from "react-icons/fi";
 
+import winnerNFTABI from '../contracts-abi/WinnerNFT.json';
+
+const winnerNFTAddress = "0xC5818c2151c59eBbFFB157F49b85c3d916859D62";  
+
 const NFTInfo = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const { id } = location.state || {};
     const [nft, setNft] = useState(NFTData[id]);
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
+    const [winnerBid, setWinnerBid] = useState(null);
 
     const { isWalletConnected, account } = useWallet();
     const [isLoading, setIsLoading] = useState(false);
-    const [transactionSuccess, setTransactionSuccess] = useState(null);
     const [balance, setBalance] = useState(0);
-    const [isSoldOut, setIsSoldOut] = useState(false); // Nuovo stato per "Sold Out"
+    const [isSoldOut, setIsSoldOut] = useState(false);
 
-    const contractAddress = "0xE63b7e012ed67e6C339aEfE33850353397b8c88D";
-    const auctionContractAddress = "0xf8e81D47203A594245E36C48e151709F0C19fBe8";
+    const auctionContractAddress = "0xa2791e606291e7f3643a3d48a0c0d74780b8f99b";
     const [bidAmount, setBidAmount] = useState("");
     const [bids, setBids] = useState([]);
     const [isBidLoading, setIsBidLoading] = useState(false);
@@ -32,10 +35,15 @@ const NFTInfo = () => {
     const [auctionStarted, setAuctionStarted] = useState(false);
     const [auctionActive, setAuctionActive] = useState(false);
     const [lastBid, setLastBid] = useState(null);
+    const [isMinting, setIsMinting] = useState(false);
+    const [mintTxHash, setMintTxHash] = useState(null);
+
 
     const formatTime = (milliseconds) => {
-        const minutes = Math.floor(milliseconds / (60 * 1000));
-        return `${minutes} minutes`;
+        const totalSeconds = Math.floor(milliseconds / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes}m ${seconds.toString().padStart(2, '0')}s`;
     };
 
     useEffect(() => {
@@ -58,9 +66,8 @@ const NFTInfo = () => {
             setLastBid(highestBid);
         }
 
-        // Carica lo stato "Sold Out" dal localStorage
         const soldOutNFTs = JSON.parse(localStorage.getItem("soldOutNFTs")) || {};
-        setIsSoldOut(!!soldOutNFTs[id]); // !! converte in booleano
+        setIsSoldOut(!!soldOutNFTs[id]);
     }, [id]);
 
     useEffect(() => {
@@ -70,7 +77,9 @@ const NFTInfo = () => {
 
         const interval = setInterval(() => {
             const remaining = timer - Date.now();
+
             if (remaining <= 0) {
+                setRemainingTime(0);
                 clearInterval(interval);
                 setTimer(null);
                 handleAuctionEnd();
@@ -160,7 +169,7 @@ const NFTInfo = () => {
             }
 
             if (!timer) {
-                const newTimerEnd = Date.now() + 30 * 60 * 1000; // 30 minutes
+                const newTimerEnd = Date.now() + 5 * 60 * 1000; // 5 minutes
                 setTimer(newTimerEnd);
                 localStorage.setItem(`timer_${id}`, newTimerEnd);
             }
@@ -175,6 +184,8 @@ const NFTInfo = () => {
         }
     };
 
+
+
     const handleAuctionEnd = async () => {
         const auctionEnded = localStorage.getItem(`auction_ended_${id}`);
         if (auctionEnded) {
@@ -183,24 +194,23 @@ const NFTInfo = () => {
         }
 
         if (bids.length > 0) {
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
-            const contract = new ethers.Contract(auctionContractAddress, auctionContractABI.abi, signer);
-
             try {
                 const highestBid = bids.reduce(
                     (max, bid) => parseFloat(bid.amount) > parseFloat(max.amount) ? bid : max,
                     bids[0]
                 );
 
-                const tx = await contract.endAuction(id);
-                await tx.wait();
+                
+                setWinnerBid(highestBid);
 
-                // Salva lo stato "Sold Out" nel localStorage
+
+                setModalMessage(`Auction ended! Winner is ${highestBid.wallet} with a bid of ${highestBid.amount} ETH.`);
+                setShowModal(true);
+
+                
                 const soldOutNFTs = JSON.parse(localStorage.getItem("soldOutNFTs")) || {};
                 soldOutNFTs[id] = true;
                 localStorage.setItem("soldOutNFTs", JSON.stringify(soldOutNFTs));
-
                 setIsSoldOut(true);
                 setNft(prevNft => ({ ...prevNft, isSoldOut: true }));
 
@@ -212,32 +222,91 @@ const NFTInfo = () => {
                     title: nft.title,
                     imageUrl: nft.imageUrl,
                     qrcode: nft.qrcode,
+                    rarity: nft.rarity,
+                    discount: nft.discount,
                 });
 
                 localStorage.setItem(`auction_ended_${id}`, true);
-                alert("Auction ended successfully! Winner: " + highestBid.wallet);
             } catch (error) {
-                console.error("Error finalizing auction:", error);
-                alert("Error finalizing auction, controlla console");
+                console.error("Error handling auction end:", error);
+                alert("Error finalizing auction, check console.");
             }
         } else {
             alert("No bids placed yet.");
         }
     };
 
+    const handleMintWinnerNFT = async () => {
+    if (!isWalletConnected || !winnerBid) {
+        alert("Wallet not connected or no winner found");
+        return;
+    }
+
+    setIsMinting(true);
+    try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(winnerNFTAddress, winnerNFTABI.abi, signer);
+
+        
+        const tokenUri = nft.tokenUri || "https://example.com/token-uri.json";
+
+        const tx = await contract.mint(tokenUri);
+        const receipt = await tx.wait();
+
+        setMintTxHash(receipt.transactionHash);
+        setModalMessage(`NFT minted successfully! Transaction hash: ${receipt.transactionHash}`);
+        setShowModal(true);
+
+    } catch (error) {
+        console.error("Mint error:", error);
+        alert("NFT minting error.");
+    } finally {
+        setIsMinting(false);
+    }
+};
+
+    useEffect(() => {
+        if (winnerBid && isWalletConnected) {
+            console.log("✅ Winner found:", winnerBid.wallet);
+            handleMintWinnerNFT();
+        }
+    }, [winnerBid, isWalletConnected]);
+
     // buy now logic
     useEffect(() => {
-        const fetchBalance = async () => {
-            if (isWalletConnected) {
+    const fetchBalance = async () => {
+        if (isWalletConnected) {
+            try {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
-                const signer = await provider.getSigner();
+                const network = await provider.getNetwork();
+                if (network.chainId !== 11155111) { // 11155111 = Sepolia
+                    console.warn("Please connect to the Sepolia network.");
+                    setBalance(null); 
+                    return; 
+                }
+                const signer = provider.getSigner();
                 const address = await signer.getAddress();
                 const balance = await provider.getBalance(address);
                 setBalance(ethers.utils.formatEther(balance));
+            } catch (error) {
+                console.error(error);
+                setBalance(null);
             }
-        };
-        fetchBalance();
-    }, [isWalletConnected]);
+        }
+    };
+    fetchBalance();
+}, [isWalletConnected]);
+
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
+    const goToWinnerNFTPage = () => {
+        setShowModal(false);
+        navigate("/nft-details", { state: { id } });
+    };
 
     return (
         <div className="w-full px-4 sm:px-6 md:px-8 bg-gradient-to-r from-black via-green-700 to-emerald-800 animate-gradient bg-[length:400%_400%] w-full min-h-screen pt-20 pb-10">
@@ -249,16 +318,22 @@ const NFTInfo = () => {
                         <div className="space-y-6 text-white">
                             <p>{nft.description}</p>
 
-                            {nft.isSoldOut || isSoldOut ? (  // Usa isSoldOut per lo stato persistente
+                            {nft.isSoldOut || isSoldOut ? (
                                 <div className="bg-red-600 text-white rounded-md px-4 py-2 font-bold inline-block">
                                     SOLD OUT
                                 </div>
                             ) : (
                                 <div className="mb-4">
                                     {auctionActive ? (
-                                        <div className="bg-green-500 text-white rounded-md px-4 py-2 font-semibold inline-block">
-                                            Active Auction
-                                        </div>
+                                        typeof remainingTime === "number" && remainingTime <= 0 ? (
+                                            <div className="bg-yellow-500 text-white rounded-md px-4 py-2 font-semibold inline-block">
+                                                Waiting Result
+                                            </div>
+                                        ) : (
+                                            <div className="bg-green-500 text-white rounded-md px-4 py-2 font-semibold inline-block">
+                                                Active Auction
+                                            </div>
+                                        )
                                     ) : (
                                         <div className="bg-gray-400 text-white rounded-md px-4 py-2 font-semibold inline-block">
                                             Awaiting Start
@@ -268,11 +343,17 @@ const NFTInfo = () => {
                             )}
 
                             <div className="mt-4">
-                                {remainingTime && (
+                                {typeof remainingTime === 'number' && (
                                     <div className="bg-gray-800 border border-gray-600 rounded-md p-3 flex items-center justify-center space-x-2">
                                         <FiClock className="text-gray-500" />
-                                        <span className="text-lg text-white font-medium">Time left:</span>
-                                        <span className="text-xl font-bold text-blue-600">{formatTime(remainingTime)}</span>
+                                        {remainingTime > 0 ? (
+                                            <>
+                                                <span className="text-lg text-white font-medium">Time left:</span>
+                                                <span className="text-xl font-bold text-blue-600">{formatTime(remainingTime)}</span>
+                                            </>
+                                        ) : (
+                                            <span className="text-lg text-red-500 font-semibold">Auction Ended</span>
+                                        )}
                                     </div>
                                 )}
                             </div>
@@ -285,53 +366,71 @@ const NFTInfo = () => {
                                     value={bidAmount}
                                     onChange={(e) => setBidAmount(e.target.value)}
                                     min="0"
+                                    disabled={nft.isSoldOut || isSoldOut || (typeof remainingTime === 'number' && remainingTime <= 0)}
                                 />
-                            </div>
-                            <div className="flex justify-between mb-4">
                                 <button
-                                    className="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-purple-600 to-orange-600 hover:from-purple-700 hover:to-orange-700 rounded-md text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowedg"
+                                    className="w-full flex items-center justify-center mt-4 px-4 py-3 bg-gradient-to-r from-purple-600 to-orange-600 hover:from-purple-700 hover:to-orange-700 rounded-md text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowedg"
                                     onClick={handlePlaceBid}
-                                    disabled={isBidLoading || nft.isSoldOut || isSoldOut}  // Controlla anche isSoldOut
+                                    disabled={isBidLoading || nft.isSoldOut || isSoldOut || (typeof remainingTime === 'number' && remainingTime <= 0)}
                                 >
-                                    Place Bid
+                                    {isBidLoading ? "Bidding..." : "Place Bid"}
                                 </button>
                             </div>
 
-                            <div className="mt-6">
-                                {bids.length > 0 && (
-                                    <div>
-                                        <h3 className="text-xl font-semibold mb-3 text-gray-200">Recent Bids:</h3>
-                                        <ul className="space-y-2">
-                                            {bids.slice(0, 2).map((bid, index) => (
-                                                <li
-                                                    key={index}
-                                                    className="flex items-center justify-between p-2 rounded-md transition-colors"
-                                                >
-                                                    <div className="flex items-center space-x-2">
-                                                        <FaUser className="text-gray-100" />
-                                                        <span className="text-gray-200 hover:text-gray-700">{bid.wallet}</span>
-                                                    </div>
-                                                    <span className="font-semibold text-blue-600 hover:text-blue-800">{bid.amount} ETH</span>
-                                                    <span className="text-gray-200 text-sm hover:text-gray-700">{new Date(bid.timestamp).toLocaleTimeString()}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                        {bids.length > 2 && (
-                                            <p className="text-gray-400 text-sm mt-2">
-                                                {bids.length - 2} more bids...
-                                            </p>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-                            <Link to="/"
-                                className="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 rounded-md text-white font-medium transition-colors"
+                            {lastBid && (
+                                <div className="mt-6 bg-gray-900 bg-opacity-40 p-3 rounded-md text-white">
+                                    <h3 className="text-lg font-semibold mb-2">Last Bid</h3>
+                                    <p>
+                                        <FaUser className="inline-block mr-2" />
+                                        {lastBid.wallet} - {lastBid.amount} ETH
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                        <Link to="/"
+                                className="w-full flex items-center justify-center mt-4 px-4 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 rounded-md text-white font-medium transition-colors"
                             >
                                 <FaTimes className="mr-2" />Go Back</Link>
-                        </div>
                     </div>
                 </div>
             </div>
+
+            {/* Modal for auction end */}
+            {showModal && (
+    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+        <div className="bg-gray-900 text-white rounded-lg p-6 max-w-md mx-auto shadow-lg">
+            <h2 className="text-xl font-semibold mb-4 text-white">Auction Finished</h2>
+            <p className="break-words text-gray-300 max-w-full truncate overflow-hidden whitespace-nowrap">{modalMessage}</p>
+
+            {isMinting ? (
+                <p className="text-gray-400">Minting your NFT, please wait...</p>
+            ) : mintTxHash ? (
+                <p className="break-words text-gray-300">
+                    Transaction Hash:{" "}
+                    <a
+                        href={`https://sepolia.etherscan.io/tx/${mintTxHash}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-blue-400 underline"
+                    >
+                        {mintTxHash}
+                    </a>
+                </p>
+            ) : null}
+
+            <div className="flex justify-end space-x-4 mt-4">
+                <button
+                    className="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600"
+                    onClick={closeModal}
+                >
+                    Close
+                </button>
+            </div>
+        </div>
+
+    </div>
+)}
+
         </div>
     );
 };

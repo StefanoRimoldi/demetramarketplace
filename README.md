@@ -107,6 +107,9 @@ Indirizzo: 0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B
 - **Auction Contract**:
 Consente agli utenti di partecipare o avviare aste per gli NFT.<br>
 Indirizzo: 0xf8e81D47203A594245E36C48e151709F0C19fBe8
+- **Winner Contract**:
+Al termine dell'asta viene mintato l'NFT al vincitore.<br>
+Indirizzo: 0xC5818c2151c59eBbFFB157F49b85c3d916859D62
 - **TransferNFT Contract**:
 Permette il trasferimento di NFT da un utente a un altro.<br>
 Indirizzo: 0xDA0bab807633f07f013f94DD0E6A4F96F8742B53

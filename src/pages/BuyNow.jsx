@@ -252,7 +252,7 @@ useEffect(() => {
 
 
   if (!nft) {
-    return <h2>NFT non trovato</h2>;
+    return <h2>NFT not found!</h2>;
   }
 
 
@@ -285,7 +285,7 @@ return (
                   Discount: {nft.discount}%
                 </p>
                 <p className="text-sm text-green-800">
-                  Acquistando questo NFT, entrerai a far parte della community Demetra e riceverai lo sconto sul tuo prossimo acquisto in negozio!
+                  Buying this NFT grants you membership in the Demetra community and a discount on your next purchase at the store!
                 </p>
               </div>
             )}

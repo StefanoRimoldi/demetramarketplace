@@ -210,7 +210,7 @@ const TransferNFT = () => {
             const timer = setTimeout(() => {
                 setMessage('');
                 setMessageType('');
-            }, 5000); // Il messaggio scompare dopo 5 secondi
+            }, 5000); // dopo 5 secondi
             return () => clearTimeout(timer);
         }
     }, [message]);

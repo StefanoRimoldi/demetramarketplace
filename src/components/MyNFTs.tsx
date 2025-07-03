@@ -80,11 +80,11 @@ const MyNFTs = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-black via-green-700 to-emerald-800 animate-gradient bg-[length:400%_400%] px-6 pt-28 pb-20">
-            {/* ... (resto del codice) */}
+            {/**/}
 
             <div className="max-w-7xl mx-auto">
                 {filteredNFTs.length === 0 ? (
-                    // ... (codice per "You don't have any NFTs")
+
                     <div className="flex justify-center items-center min-h-[400px]">
                         <div className="max-w-md w-full backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl shadow-xl p-8 text-center">
                             <div className="mx-auto w-24 h-24 backdrop-blur-md bg-white/10 border border-white/20 rounded-full flex items-center justify-center mb-6">
@@ -169,7 +169,7 @@ const MyNFTs = () => {
 
             {/* QR Modal */}
             {isQrModalOpen && selectedNFT && (
-                // ... (codice della modale QR)
+
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
                     <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl sm:p-8 my-8 max-h-[90vh] mx-8 overflow-auto">
                         <button
@@ -183,7 +183,7 @@ const MyNFTs = () => {
                         <div className="text-center">
                             <h2 className="mb-4 text-2xl font-bold text-gray-900">{selectedNFT.title}</h2>
 
-                            {/* Mostriamo l'immagine del QR code che è stata salvata nel localStorage */}
+                            {/* immagine qrcode */}
                             <div className="mb-6 flex justify-center">
                                 <div className="rounded-xl bg-white p-4">
                                     <img
@@ -205,8 +205,7 @@ const MyNFTs = () => {
 
                                     <div className="rounded-lg bg-gray-50 p-4">
                                         <p className="text-sm text-gray-600">
-                                            Congratulazioni! Con il tuo NFT puoi partecipare agli eventi Demetra e
-                                            usufruire di uno sconto esclusivo in negozio.
+                                            Congratulations! You can participate in Demetra events and enjoy an exclusive discount in-store.
                                         </p>
                                     </div>
                                 </div>

@@ -29,7 +29,7 @@ const MintNFTForm = () => {
     if (password === "nft123") { // Cambia qui la password
       setPasswordModalVisible(false); // Se la password è corretta, nascondi la finestra di password
     } else {
-      alert("Password errata");
+      alert("Invalid password");
     }
   };
 
@@ -41,13 +41,13 @@ const MintNFTForm = () => {
     try {
       // Controlla se l'utente ha MetaMask installato e connesso
       if (!window.ethereum) {
-        return alert("Installa MetaMask!");
+        return alert("Please install MetaMask!");
       }
 
       // Verifica se c'è una connessione attiva a MetaMask
       const accounts = await window.ethereum.request({ method: "eth_accounts" });
       if (accounts.length === 0) {
-        return alert("Connettiti a MetaMask prima di procedere.");
+        return alert("Connect your MetaMask wallet to continue.");
       }
 
       // Se MetaMask è connesso, procedi con il minting
@@ -59,7 +59,7 @@ const MintNFTForm = () => {
 
       const priceInWei = ethers.utils.parseEther(form.price);
 
-      setStatus("Minting in corso...");
+      setStatus("Minting ongoing");
       setModalType("loading"); // Mostra lo stato di "loading"
       setShowModal(true);
 
@@ -76,7 +76,7 @@ const MintNFTForm = () => {
       const receipt = await tx.wait();
 
       // Verifica gli eventi nella transazione
-      console.log("Eventi ricevuti:", receipt.events);
+      console.log("Events received", receipt.events);
 
       const mintedEvent = receipt.events?.find((e) => e.event === "Minted");
 
@@ -84,15 +84,15 @@ const MintNFTForm = () => {
         console.log("Evento Minted:", mintedEvent);
         const tokenId = mintedEvent.args.tokenId.toString();
         setMintedTokenId(tokenId);
-        setStatus(`✅ NFT creato con Token ID: ${tokenId}`);
+        setStatus(`✅ NFT created with Token ID: ${tokenId}`);
         setModalType("success"); // Mostra la finestra di successo
       } else {
-        setStatus("✅ NFT creato, ma senza recuperare il Token ID.");
+        setStatus("✅ NFT minted, but unable to retrieve Token ID");
         setModalType("error"); // Mostra la finestra di errore
       }
     } catch (error) {
       console.error(error);
-      setStatus("❌ Errore durante il minting.");
+      setStatus("❌ Failed to mint NFT");
       setModalType("error"); // Mostra la finestra di errore
     }
   };
@@ -138,7 +138,7 @@ const MintNFTForm = () => {
       {/* Form per il minting NFT */}
       {!passwordModalVisible && (
         <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-2xl mt-20 p-10 mb-8 max-w-lg w-full">
-          <h2 className="text-3xl font-bold text-white mb-8">Crea il tuo NFT</h2>
+          <h2 className="text-3xl font-bold text-white mb-8">Create your NFT</h2>
 
           {["title", "description", "rarity", "price", "imageURL", "discount"].map((field) => (
             <div key={field} className="mb-6">
