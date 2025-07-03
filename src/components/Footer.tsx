@@ -19,7 +19,7 @@ const Footer = () => {
         { name: "Swap", href: "/swap" },
         { name: "History", href: "/purchase-history" },
         { name: "Auction", href: "/auction" },
-        { name: "Mint NFT", href: "/mintnft" }, // <-- qui il percorso corretto
+        { name: "Mint NFT", href: "/mintnft" },
       ],
     },
     {
