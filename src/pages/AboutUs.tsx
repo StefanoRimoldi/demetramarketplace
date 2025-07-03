@@ -93,7 +93,7 @@ such as bio-polymers, regenerated and cruelty-free fabrics, and plastic-free, 10
     {/* Immagine - sotto su mobile, sinistra su desktop */}
     <div className="w-full ml-10 mt-10 md:w-1/2 mb-10 md:mb-0">
       <img 
-        src="/images/3440658.png"  // <-- aggiorna il percorso se necessario
+        src="/images/3440658.png"
         alt="Demetra Web3 Visual" 
         className="w-full h-auto max-w-md mx-auto md:mx-0"
       />
@@ -140,7 +140,7 @@ Each NFT represents not just a collectible item, but also a way to support ethic
         <div className="flex justify-center mt-8 mb-8">
 
         <button 
-            onClick={() => window.location.href = '/'} // Sostituisci con il percorso della tua galleria
+            onClick={() => window.location.href = '/'}
             className="bg-emerald-500 text-white py-3 px-8 rounded-full text-xl font-semibold transition duration-300 transform hover:scale-105 hover:bg-emerald-600"
             >
             Explore Our Gallery
